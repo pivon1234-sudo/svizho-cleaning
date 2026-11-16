@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Свіжо — клінінг квартир і будинків у Києві</title>
+  <meta name="description" content="Підтримуюче, генеральне прибирання та прибирання після ремонту в Києві. Розрахуйте вартість онлайн і залиште заявку за хвилину.">
+  <meta name="theme-color" content="#0F3B35">
+  <meta property="og:title" content="Свіжо — клінінг у Києві">
+  <meta property="og:description" content="Прибираємо квартири, будинки й офіси. Вартість — одразу на сайті.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Перейти до змісту</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="logo" href="#top" aria-label="Свіжо — на початок сторінки">
+        <span class="logo__mark" aria-hidden="true"></span>Свіжо
+      </a>
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="#services">Послуги</a>
+        <a href="#included">Що входить</a>
+        <a href="#process">Як працюємо</a>
+        <a href="#faq">Питання</a>
+      </nav>
+      <a class="btn btn--small" href="#order">Розрахувати</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: пилова плівка на canvas, яку відвідувач «протирає» -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero__card">
+          <div class="hero__tiles" aria-hidden="true"></div>
+          <canvas class="hero__dust" aria-hidden="true"></canvas>
+          <div class="hero__content">
+            <p class="eyebrow">Клінінг · Київ · 8:00–21:00</p>
+            <h1 class="hero__title">Вдома чисто.<br>А ви — вільні.</h1>
+            <p class="hero__lead">Прибираємо квартири, будинки та офіси. Власні засоби й інвентар, фіксована ціна до початку роботи.</p>
+            <div class="hero__actions">
+              <a class="btn" href="#order">Розрахувати вартість</a>
+              <a class="btn btn--ghost" href="tel:+380000000000">+380 00 000 00 00</a>
+            </div>
+          </div>
+          <p class="hero__hint" aria-hidden="true">
+            <span class="hero__hint-icon"></span><span data-hint>Проведіть по плитці — протріть</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОСЛУГИ -->
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Послуги</p>
+          <h2 id="services-title">Три види прибирання — під стан вашого житла</h2>
+        </div>
+        <div class="services">
+          <article class="service">
+            <h3>Підтримуюче</h3>
+            <p>Для житла, де прибирають регулярно. Пил, підлога, кухня й санвузол — за 2–4 години.</p>
+            <p class="service__price"><span>від</span> 35 <small>грн/м²</small></p>
+            <a class="service__link" href="#order" data-pick="regular">Обрати підтримуюче</a>
+          </article>
+          <article class="service service--accent">
+            <h3>Генеральне</h3>
+            <p>Глибоке прибирання кожної поверхні: всередині шаф, техніки, за меблями, плитка й шви.</p>
+            <p class="service__price"><span>від</span> 60 <small>грн/м²</small></p>
+            <a class="service__link" href="#order" data-pick="deep">Обрати генеральне</a>
+          </article>
+          <article class="service">
+            <h3>Після ремонту</h3>
+            <p>Прибираємо будівельний пил, сліди фарби, клею й затирки. Миємо вікна та рами.</p>
+            <p class="service__price"><span>від</span> 85 <small>грн/м²</small></p>
+            <a class="service__link" href="#order" data-pick="renovation">Обрати після ремонту</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЩО ВХОДИТЬ -->
+    <section class="section section--mint" id="included" aria-labelledby="included-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Що входить</p>
+          <h2 id="included-title">Чек-лист по кімнатах</h2>
+          <p class="section__sub">Майстер іде за цим списком і відмічає кожен пункт. Наприкінці ви перевіряєте роботу разом.</p>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Порівняння видів прибирання">
+          <table class="checklist">
+            <thead>
+              <tr>
+                <th scope="col">Роботи</th>
+                <th scope="col">Підтримуюче</th>
+                <th scope="col">Генеральне</th>
+                <th scope="col">Після ремонту</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="checklist__group"><th scope="rowgroup" colspan="4">Кухня</th></tr>
+              <tr><th scope="row">Фасади, стільниця, фартух</th><td class="yes">Так</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Плита й витяжка зовні</th><td class="yes">Так</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Шафи всередині</th><td class="no">—</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Мікрохвильовка всередині</th><td class="no">—</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr class="checklist__group"><th scope="rowgroup" colspan="4">Санвузол</th></tr>
+              <tr><th scope="row">Унітаз, раковина, ванна чи душ</th><td class="yes">Так</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Дзеркала й змішувачі від нальоту</th><td class="yes">Так</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Шви плитки щіткою</th><td class="no">—</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr class="checklist__group"><th scope="rowgroup" colspan="4">Кімнати й коридор</th></tr>
+              <tr><th scope="row">Пил з відкритих поверхонь</th><td class="yes">Так</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Пилосос і миття підлоги</th><td class="yes">Так</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Плінтуси, двері, вимикачі</th><td class="no">—</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">За й під меблями</th><td class="no">—</td><td class="yes">Так</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Будівельний пил, фарба, клей</th><td class="no">—</td><td class="no">—</td><td class="yes">Так</td></tr>
+              <tr><th scope="row">Вікна та рами</th><td class="extra">Окремо</td><td class="extra">Окремо</td><td class="yes">Так</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЯК ПРАЦЮЄМО (реальна послідовність, тому нумерація) -->
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Як працюємо</p>
+          <h2 id="process-title">Від заявки до чистої квартири</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Заявка</h3>
+            <p>Розраховуєте вартість на сайті й залишаєте контакти. Займає хвилину.</p>
+          </li>
+          <li>
+            <h3>Дзвінок</h3>
+            <p>Протягом 15 хвилин уточнюємо деталі й фіксуємо ціну та час.</p>
+          </li>
+          <li>
+            <h3>Прибирання</h3>
+            <p>Майстер приїжджає зі своїми засобами, пилососом і драбиною.</p>
+          </li>
+          <li>
+            <h3>Перевірка</h3>
+            <p>Ви перевіряєте роботу за чек-листом. Оплата — тільки після цього.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР + ЗАЯВКА (Netlify Forms) -->
+    <section class="section section--pine" id="order" aria-labelledby="order-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Розрахунок і заявка</p>
+          <h2 id="order-title">Порахуйте вартість — і ми передзвонимо</h2>
+        </div>
+
+        <form class="order" name="booking" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="booking">
+          <input type="hidden" name="estimate" value="">
+          <p class="visually-hidden"><label>Не заповнюйте це поле: <input name="bot-field"></label></p>
+
+          <div class="order__calc">
+            <fieldset class="field">
+              <legend>Вид прибирання</legend>
+              <div class="segmented">
+                <label><input type="radio" name="type" value="Підтримуюче" data-key="regular" checked><span>Підтримуюче</span></label>
+                <label><input type="radio" name="type" value="Генеральне" data-key="deep"><span>Генеральне</span></label>
+                <label><input type="radio" name="type" value="Після ремонту" data-key="renovation"><span>Після ремонту</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="area">Площа, м²</label>
+              <div class="area">
+                <input type="range" id="area-range" min="20" max="250" step="5" value="55" aria-label="Площа, повзунок">
+                <input type="number" id="area" name="area" min="20" max="500" step="1" value="55" inputmode="numeric">
+              </div>
+            </div>
+
+            <fieldset class="field">
+              <legend>Додатково</legend>
+              <div class="extras">
+                <label class="extra-row">
+                  <span>Миття вікон <small>150 грн за стулку</small></span>
+                  <span class="counter">
+                    <button type="button" data-step="-1" aria-label="Менше вікон">−</button>
+                    <input type="number" name="windows" id="windows" value="0" min="0" max="40" inputmode="numeric" aria-label="Кількість стулок">
+                    <button type="button" data-step="1" aria-label="Більше вікон">+</button>
+                  </span>
+                </label>
+                <label class="check"><input type="checkbox" name="extras" value="Духовка всередині" data-price="350"><span>Духовка всередині <small>350 грн</small></span></label>
+                <label class="check"><input type="checkbox" name="extras" value="Холодильник всередині" data-price="300"><span>Холодильник всередині <small>300 грн</small></span></label>
+                <label class="check"><input type="checkbox" name="extras" value="Балкон" data-price="400"><span>Балкон чи лоджія <small>400 грн</small></span></label>
+                <label class="check"><input type="checkbox" name="extras" value="Прасування 1 год" data-price="300"><span>Прасування, 1 година <small>300 грн</small></span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="order__side">
+            <div class="receipt" aria-live="polite">
+              <p class="receipt__label">Орієнтовна вартість</p>
+              <p class="receipt__total"><span data-total>1 925</span> <small>грн</small></p>
+              <ul class="receipt__lines" data-lines></ul>
+              <p class="receipt__note">Точну ціну фіксуємо під час дзвінка — вона не зміниться в день прибирання.</p>
+            </div>
+
+            <div class="contact">
+              <div class="field">
+                <label for="name">Ваше ім’я</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="phone">Телефон</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+380" required pattern="[\d\s()+\-]{10,}">
+              </div>
+              <div class="field">
+                <label for="date">Бажана дата</label>
+                <input id="date" name="date" type="date">
+              </div>
+              <div class="field">
+                <label for="comment">Коментар <small>необов’язково</small></label>
+                <textarea id="comment" name="comment" rows="3" placeholder="Район, поверх, тварини вдома…"></textarea>
+              </div>
+              <button class="btn btn--glove btn--block" type="submit">Надіслати заявку</button>
+              <p class="contact__legal">Натискаючи кнопку, ви погоджуєтесь, що ми зателефонуємо вам щодо заявки.</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap wrap--narrow">
+        <div class="section__head">
+          <p class="eyebrow">Питання</p>
+          <h2 id="faq-title">Що зазвичай питають</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Чи потрібно бути вдома під час прибирання?</summary>
+            <p>Ні. Можна залишити ключі консьєржу чи в поштовій скриньці — майстер напише, коли почне й закінчить, і надішле фото.</p>
+          </details>
+          <details>
+            <summary>Якими засобами ви прибираєте?</summary>
+            <p>Професійними засобами, безпечними для дітей і тварин. Якщо у вас алергія чи свої побажання — скажіть під час дзвінка, використаємо ваші.</p>
+          </details>
+          <details>
+            <summary>Як можна оплатити?</summary>
+            <p>Готівкою, карткою або переказом після прибирання. Для компаній — за рахунком.</p>
+          </details>
+          <details>
+            <summary>Що, якщо мені щось не сподобається?</summary>
+            <p>Повідомте протягом 24 годин — майстер приїде й переробить безкоштовно.</p>
+          </details>
+          <details>
+            <summary>Ви виїжджаєте за місто?</summary>
+            <p>Так, у межах 30 км від Києва. Доїзд за кільцеву — від 200 грн, точну суму назвемо під час дзвінка.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div>
+        <a class="logo logo--light" href="#top"><span class="logo__mark" aria-hidden="true"></span>Свіжо</a>
+        <p class="footer__muted">Клінінг квартир, будинків і офісів у Києві.</p>
+      </div>
+      <div>
+        <p class="footer__title">Контакти</p>
+        <p><a href="tel:+380000000000">+380 00 000 00 00</a></p>
+        <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+      </div>
+      <div>
+        <p class="footer__title">Графік</p>
+        <p>Щодня 8:00–21:00</p>
+        <p class="footer__muted">Заявки на сайті — цілодобово</p>
+      </div>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© <span data-year>2026</span> Свіжо</p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

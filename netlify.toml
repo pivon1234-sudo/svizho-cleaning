@@ -1,0 +1,33 @@
+# Налаштування Netlify.
+# Сайт статичний: збірка не потрібна, публікуємо корінь репозиторію.
+# Після підключення репозиторію GitHub кожен push у гілку main
+# автоматично публікує сайт, а кожен Pull Request отримує preview-адресу.
+
+[build]
+  publish = "."
+  command = ""
+
+# Заголовки безпеки
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Кеш для статики (CSS/JS/SVG). HTML не кешуємо, щоб правки було видно одразу.
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Красиві адреси: /thanks замість /thanks.html
+[[redirects]]
+  from = "/thanks"
+  to = "/thanks.html"
+  status = 200
