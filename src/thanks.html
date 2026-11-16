@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Заявку надіслано — Свіжо</title>
+  <title>Заявку надіслано — {{contacts.brand}}</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Onest:wght@400;600&family=Unbounded:wght@800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <main class="plain">
     <div class="plain__card">
-      <a class="logo" href="/"><span class="logo__mark" aria-hidden="true"></span>Свіжо</a>
+      <a class="logo" href="/"><span class="logo__mark" aria-hidden="true"></span>{{contacts.brand}}</a>
       <h1>Заявку надіслано</h1>
-      <p>Передзвонимо протягом 15 хвилин у робочий час (щодня 8:00–21:00), уточнимо деталі й зафіксуємо ціну.</p>
+      <p>{{contacts.callback_promise}} ({{contacts.hours_lower}}), уточнимо деталі й зафіксуємо ціну.</p>
       <a class="btn" href="/">Повернутися на сайт</a>
     </div>
   </main>

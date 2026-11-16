@@ -6,13 +6,9 @@
 (function () {
   "use strict";
 
-  /* ---------- Ціни (змінюйте тут) ---------- */
-  var PRICING = {
-    regular:    { label: "Підтримуюче",   perM2: 35, min: 1200 },
-    deep:       { label: "Генеральне",    perM2: 60, min: 2400 },
-    renovation: { label: "Після ремонту", perM2: 85, min: 3500 }
-  };
-  var WINDOW_PRICE = 150; // грн за стулку
+  /* Ціни не задаються тут: їх вписує в розмітку build.js з content/services.json
+     і content/extras.json (атрибути data-per-m2, data-min, data-price).
+     Змінюйте ціни в адмінці (/admin). */
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fmt = new Intl.NumberFormat("uk-UA");
@@ -132,7 +128,7 @@
       isClean = true;
       canvas.classList.add("is-clean");
       if (hint) hint.classList.add("is-done");
-      if (hintText) hintText.textContent = "Чисто. Так буде і у вас удома";
+      if (hintText && hintText.dataset.done) hintText.textContent = hintText.dataset.done;
     }
 
     function point(e) {
@@ -216,7 +212,12 @@
 
     function calc() {
       var typeInput = form.querySelector('input[name="type"]:checked');
-      var plan = PRICING[typeInput.dataset.key];
+      var plan = {
+        label: typeInput.value,
+        perM2: parseFloat(typeInput.dataset.perM2) || 0,
+        min: parseFloat(typeInput.dataset.min) || 0
+      };
+      var windowPrice = parseFloat(windows.dataset.price) || 0;
       var area = clampInt(areaNum.value || 0, 0, 500);
       var lines = [];
 
@@ -224,7 +225,7 @@
       lines.push([plan.label + ", " + area + " м²", base]);
 
       var win = clampInt(windows.value, 0, 40);
-      if (win > 0) lines.push(["Вікна × " + win, win * WINDOW_PRICE]);
+      if (win > 0) lines.push(["Вікна × " + win, win * windowPrice]);
 
       form.querySelectorAll('input[name="extras"]:checked').forEach(function (cb) {
         lines.push([cb.value, parseInt(cb.dataset.price, 10)]);

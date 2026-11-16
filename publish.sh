@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Публікує правки: commit + push у main. Netlify побачить push і сам оновить сайт.
 # Використання:  ./publish.sh "що змінили"
+# Правки з адмінки (/admin) комітяться самі — перед локальними правками зробіть git pull.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -22,7 +23,12 @@ if [ -z "$(git status --porcelain)" ]; then
   exit 0
 fi
 
+# Перевіряємо, що сайт збирається, перш ніж відправляти
+node build.js
+
 git add -A
 git commit -m "$msg"
+# Підтягуємо правки, зроблені в адмінці, щоб не було конфлікту
+git pull --rebase origin main
 git push origin main
 echo "Готово. Netlify почав деплой — перевірте вкладку Deploys у панелі Netlify."

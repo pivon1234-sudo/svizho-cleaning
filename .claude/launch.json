@@ -1,6 +1,7 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "site", "runtimeExecutable": "python3", "runtimeArgs": ["-m", "http.server", "8000"], "port": 8000 }
+    { "name": "site", "runtimeExecutable": "sh", "runtimeArgs": ["-c", "node build.js && python3 -m http.server 8000 -d dist"], "port": 8000 },
+    { "name": "cms-local", "runtimeExecutable": "npx", "runtimeArgs": ["-y", "decap-server@3.11.6"], "port": 8081 }
   ]
 }

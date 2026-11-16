@@ -150,6 +150,7 @@ p { margin: 0; }
   display: block; margin-top: .3em;
   font-size: .4em; font-weight: 500; letter-spacing: -.02em; line-height: 1.1;
 }
+.hero__title-sub:empty { display: none; }
 .hero__lead { margin-top: 22px; max-width: 46ch; font-size: clamp(17px, 1.6vw, 20px); color: var(--ink); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 

@@ -1,0 +1,157 @@
+# Налаштування адмінки (Decap CMS).
+# Адмінка відкривається на  https://<ваш-сайт>/admin
+# Вхід — через GitHub. Збереження в адмінці робить коміт у гілку main,
+# після чого Netlify сам перебудовує й публікує сайт (≈30–60 с).
+
+backend:
+  name: github
+  repo: pivon1234-sudo/svizho-cleaning   # <логін>/<репозиторій> на GitHub
+  branch: main
+  commit_messages:
+    update: "Адмінка: оновлено {{path}}"
+    uploadMedia: "Адмінка: завантажено {{path}}"
+    deleteMedia: "Адмінка: видалено {{path}}"
+
+# Для роботи на своєму комп'ютері без GitHub (див. ADMIN.md): npx decap-server
+local_backend: true
+
+locale: uk
+editor:
+  preview: false
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: site
+    label: "Сайт"
+    description: "Тексти, ціни й контакти головної сторінки. Після збереження сайт оновиться приблизно за хвилину."
+    files:
+
+      - name: contacts
+        label: "Контакти й графік"
+        file: content/contacts.json
+        fields:
+          - { name: brand, label: "Назва компанії", widget: string }
+          - { name: tagline, label: "Підпис у підвалі", widget: string }
+          - { name: phone, label: "Телефон", widget: string, hint: "Як показувати на сайті, напр. +380 67 123 45 67" }
+          - { name: email, label: "Email", widget: string }
+          - { name: hours, label: "Графік роботи", widget: string, hint: "Напр. Щодня 8:00–21:00" }
+          - { name: hours_note, label: "Примітка до графіка", widget: string }
+          - { name: callback_promise, label: "Обіцянка передзвонити (сторінка «Заявку надіслано»)", widget: string }
+
+      - name: hero
+        label: "Перший екран"
+        file: content/hero.json
+        fields:
+          - { name: eyebrow, label: "Надпис над заголовком", widget: string }
+          - { name: title, label: "Головний заголовок", widget: string }
+          - { name: title_sub, label: "Другий рядок заголовка (дрібніше)", widget: string, required: false }
+          - { name: lead, label: "Текст під заголовком", widget: text }
+          - { name: button, label: "Текст кнопки", widget: string }
+          - { name: hint, label: "Підказка «протріть»", widget: string }
+          - { name: hint_done, label: "Підказка після протирання", widget: string }
+
+      - name: services
+        label: "Послуги й ціни"
+        file: content/services.json
+        fields:
+          - { name: heading, label: "Заголовок секції", widget: string }
+          - name: items
+            label: "Послуги"
+            label_singular: "послугу"
+            widget: list
+            allow_add: false
+            allow_remove: false
+            hint: "Послуг завжди три — вони відповідають колонкам чек-листа."
+            summary: "{{fields.name}} — {{fields.price_per_m2}} грн/м²"
+            fields:
+              - { name: name, label: "Назва", widget: string }
+              - { name: description, label: "Опис", widget: text }
+              - { name: price_per_m2, label: "Ціна за м², грн", widget: number, value_type: int, min: 1 }
+              - { name: min_price, label: "Мінімальне замовлення, грн", widget: number, value_type: int, min: 0 }
+
+      - name: extras
+        label: "Додаткові послуги"
+        file: content/extras.json
+        fields:
+          - { name: window_price, label: "Миття вікон — ціна за стулку, грн", widget: number, value_type: int, min: 0 }
+          - name: items
+            label: "Додаткові послуги (галочки в калькуляторі)"
+            label_singular: "послугу"
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}} грн"
+            fields:
+              - { name: name, label: "Назва", widget: string }
+              - { name: price, label: "Ціна, грн", widget: number, value_type: int, min: 0 }
+
+      - name: checklist
+        label: "Чек-лист «Що входить»"
+        file: content/checklist.json
+        fields:
+          - { name: heading, label: "Заголовок секції", widget: string }
+          - { name: subheading, label: "Підзаголовок", widget: text }
+          - name: groups
+            label: "Кімнати"
+            label_singular: "кімнату"
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { name: name, label: "Кімната", widget: string }
+              - name: rows
+                label: "Роботи"
+                label_singular: "роботу"
+                widget: list
+                summary: "{{fields.task}}"
+                fields:
+                  - { name: task, label: "Що робимо", widget: string }
+                  - name: s1
+                    label: "Послуга 1 (підтримуюче)"
+                    widget: select
+                    default: "yes"
+                    options: [{ label: "Так", value: "yes" }, { label: "Ні", value: "no" }, { label: "Окремо", value: "extra" }]
+                  - name: s2
+                    label: "Послуга 2 (генеральне)"
+                    widget: select
+                    default: "yes"
+                    options: [{ label: "Так", value: "yes" }, { label: "Ні", value: "no" }, { label: "Окремо", value: "extra" }]
+                  - name: s3
+                    label: "Послуга 3 (після ремонту)"
+                    widget: select
+                    default: "yes"
+                    options: [{ label: "Так", value: "yes" }, { label: "Ні", value: "no" }, { label: "Окремо", value: "extra" }]
+
+      - name: process
+        label: "Як працюємо"
+        file: content/process.json
+        fields:
+          - { name: heading, label: "Заголовок секції", widget: string }
+          - name: steps
+            label: "Кроки (по порядку)"
+            label_singular: "крок"
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { name: title, label: "Назва кроку", widget: string }
+              - { name: text, label: "Опис", widget: text }
+
+      - name: faq
+        label: "Питання й відповіді"
+        file: content/faq.json
+        fields:
+          - { name: heading, label: "Заголовок секції", widget: string }
+          - name: items
+            label: "Питання"
+            label_singular: "питання"
+            widget: list
+            summary: "{{fields.question}}"
+            fields:
+              - { name: question, label: "Питання", widget: string }
+              - { name: answer, label: "Відповідь", widget: text }
+
+      - name: seo
+        label: "Пошуковики (SEO)"
+        file: content/seo.json
+        fields:
+          - { name: title, label: "Заголовок вкладки й у Google", widget: string, hint: "До ~60 символів" }
+          - { name: description, label: "Опис у Google", widget: text, hint: "До ~160 символів" }

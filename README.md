@@ -1,72 +1,51 @@
 # Свіжо — сайт клінінгу
 
-Статичний сайт (HTML + CSS + JS, без збірки). Деплой: **GitHub → Netlify**, автоматично після кожного `git push` у гілку `main`.
+Статичний сайт з адмінкою. Деплой: **GitHub → Netlify**, автоматично після кожного коміту в `main` — з адмінки чи з комп'ютера.
+
+- **Адмінка:** `https://<ваш-сайт>/admin` — налаштування див. у **[ADMIN.md](ADMIN.md)**.
+- Тексти, ціни й контакти лежать у `content/*.json`. Сторінки збираються з них скриптом `build.js` (без залежностей) у папку `dist/`.
 
 ## Структура
 
-| Файл | Що в ньому |
+| Шлях | Що це |
 |---|---|
-| `index.html` | Уся головна сторінка: тексти, послуги, чек-лист, FAQ, форма заявки |
-| `styles.css` | Стилі. Кольори й шрифти — змінні на початку файлу (`:root`) |
-| `main.js` | «Пил» у першому екрані та калькулятор. **Ціни — об'єкт `PRICING` на початку файлу** |
-| `thanks.html` | Сторінка після надсилання заявки |
-| `404.html` | Сторінка «не знайдено» |
-| `netlify.toml` | Налаштування Netlify (папка публікації, заголовки) |
-| `publish.sh` | Публікація правок однією командою |
-
-## Перший запуск (один раз)
-
-### 1. Репозиторій на GitHub
-Створіть порожній репозиторій на github.com (без README), потім у цій папці:
-
-```bash
-git remote add origin https://github.com/<ваш-логін>/<назва-репо>.git
-git push -u origin main
-```
-
-Або одною командою через GitHub CLI:
-
-```bash
-gh repo create svizho-cleaning --private --source=. --push
-```
-
-### 2. Підключення Netlify
-1. app.netlify.com → **Add new site → Import an existing project → GitHub**.
-2. Оберіть репозиторій.
-3. Налаштування підтягнуться з `netlify.toml` (Build command — порожньо, Publish directory — `.`). Натисніть **Deploy**.
-
-Готово: з цього моменту **кожен push у `main` автоматично оновлює сайт** (зазвичай за 10–30 секунд), а кожен Pull Request отримує власну preview-адресу.
-
-### 3. Заявки з форми
-Форма працює через **Netlify Forms** — сервер не потрібен.
-- Заявки: Netlify → ваш сайт → **Forms → booking**.
-- Сповіщення на пошту: **Site configuration → Notifications → Emails and webhooks → Form submission notifications → Add notification → Email**. Вкажіть пошту, на яку мають приходити заявки.
-
-> Якщо форма не з'явилась у Forms: **Site configuration → Forms → Enable form detection**, потім зробіть новий деплой (Deploys → Trigger deploy).
+| `content/*.json` | Усі тексти, ціни, контакти (їх редагує адмінка) |
+| `src/*.html` | Шаблони сторінок: розмітка + `{{змінні}}` з `content/` |
+| `build.js` | Збирає `src/` + `content/` → `dist/` і перевіряє дані |
+| `styles.css` | Стилі. Кольори й шрифти — змінні в `:root` |
+| `main.js` | «Пил» у першому екрані та калькулятор (ціни бере з розмітки) |
+| `admin/` | Адмінка Decap CMS (`config.yml` — які поля редагуються) |
+| `netlify.toml` | Netlify: команда `node build.js`, публікується `dist/` |
+| `publish.sh` | Публікація правок з комп'ютера однією командою |
 
 ## Як вносити правки
 
-1. Змініть файли.
-2. Опублікуйте:
+**Тексти, ціни, контакти** — в адмінці `/admin`. Натиснули «Опублікувати» → за хвилину на сайті.
+
+**Дизайн і код** (`styles.css`, `main.js`, `src/`) — на комп'ютері, потім:
 
 ```bash
-./publish.sh "Оновив ціни"
+./publish.sh "Що змінили"
 ```
 
-Скрипт робить `git add` + `commit` + `push`, а Netlify сам публікує нову версію. Статус — у вкладці **Deploys** на Netlify.
+Скрипт збирає сайт (якщо є помилка — зупиняється), підтягує правки з адмінки (`git pull --rebase`), робить коміт і push. Netlify публікує сам.
 
 ## Перегляд локально
 
 ```bash
-python3 -m http.server 8000
+node build.js && python3 -m http.server 8000 -d dist
 ```
 
-Відкрийте http://localhost:8000. (Форма локально не надсилається — вона працює лише на Netlify.)
+Відкрийте http://localhost:8000. Форма заявки локально не надсилається — вона працює лише на Netlify.
 
-## Що замінити перед запуском
+## Перший запуск Netlify (якщо ще не зроблено)
+1. app.netlify.com → **Add new project → Import an existing project → GitHub** → репозиторій `svizho-cleaning`.
+2. Налаштування збірки підтягнуться з `netlify.toml`. **Deploy**.
+3. Заявки: **Forms → booking**. Сповіщення на пошту: **Project configuration → Notifications → Form submission notifications**.
+4. Адмінка: див. [ADMIN.md](ADMIN.md).
 
-- [ ] Телефон `+380 00 000 00 00` (у `index.html` — шапка hero і підвал, посилання `tel:`)
-- [ ] Пошта `hello@example.com` (підвал)
-- [ ] Ціни — `PRICING` і `WINDOW_PRICE` у `main.js` **та** «від … грн/м²» у картках послуг в `index.html`; ціни доп. послуг — атрибути `data-price` у формі
-- [ ] Назва «Свіжо», місто, графік роботи, відповіді у FAQ
+## Що замінити перед запуском (в адмінці → «Контакти й графік», «Послуги й ціни»)
+- [ ] Телефон і email
+- [ ] Ціни послуг і додаткових послуг
+- [ ] Назва, графік, відповіді у FAQ
 - [ ] Власний домен: Netlify → **Domain management → Add a domain**

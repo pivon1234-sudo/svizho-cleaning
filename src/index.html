@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <!-- ШАБЛОН. Тексти беруться з content/*.json (подвійні фігурні дужки), повторювані блоки
+       (маркери з @) генерує build.js. Редагуйте тексти в адмінці (/admin) або в content/*.json. -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{seo.title}}</title>
+  <meta name="description" content="{{seo.description}}">
+  <meta name="theme-color" content="#0F3B35">
+  <meta property="og:title" content="{{seo.title}}">
+  <meta property="og:description" content="{{seo.description}}">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Перейти до змісту</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="logo" href="#top" aria-label="{{contacts.brand}} — на початок сторінки">
+        <span class="logo__mark" aria-hidden="true"></span>{{contacts.brand}}
+      </a>
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="#services">Послуги</a>
+        <a href="#included">Що входить</a>
+        <a href="#process">Як працюємо</a>
+        <a href="#faq">Питання</a>
+      </nav>
+      <a class="btn btn--small" href="#order">Розрахувати</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: пилова плівка на canvas, яку відвідувач «протирає» -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero__card">
+          <div class="hero__tiles" aria-hidden="true"></div>
+          <canvas class="hero__dust" aria-hidden="true"></canvas>
+          <div class="hero__content">
+            <p class="eyebrow">{{hero.eyebrow}}</p>
+            <h1 class="hero__title">{{hero.title}} <span class="hero__title-sub">{{hero.title_sub}}</span></h1>
+            <p class="hero__lead">{{hero.lead}}</p>
+            <div class="hero__actions">
+              <a class="btn" href="#order">{{hero.button}}</a>
+              <a class="btn btn--ghost" href="{{contacts.phone_href}}">{{contacts.phone}}</a>
+            </div>
+          </div>
+          <p class="hero__hint" aria-hidden="true">
+            <span class="hero__hint-icon"></span><span data-hint data-done="{{hero.hint_done}}">{{hero.hint}}</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОСЛУГИ -->
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Послуги</p>
+          <h2 id="services-title">{{services.heading}}</h2>
+        </div>
+        <div class="services">
+<!-- @services -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ЩО ВХОДИТЬ -->
+    <section class="section section--mint" id="included" aria-labelledby="included-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Що входить</p>
+          <h2 id="included-title">{{checklist.heading}}</h2>
+          <p class="section__sub">{{checklist.subheading}}</p>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Порівняння видів прибирання">
+          <table class="checklist">
+<!-- @checklist -->
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЯК ПРАЦЮЄМО (реальна послідовність, тому нумерація) -->
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Як працюємо</p>
+          <h2 id="process-title">{{process.heading}}</h2>
+        </div>
+        <ol class="steps">
+<!-- @steps -->
+        </ol>
+      </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР + ЗАЯВКА (Netlify Forms) -->
+    <section class="section section--pine" id="order" aria-labelledby="order-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Розрахунок і заявка</p>
+          <h2 id="order-title">Порахуйте вартість — і ми передзвонимо</h2>
+        </div>
+
+        <form class="order" name="booking" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="booking">
+          <input type="hidden" name="estimate" value="">
+          <p class="visually-hidden"><label>Не заповнюйте це поле: <input name="bot-field"></label></p>
+
+          <div class="order__calc">
+            <fieldset class="field">
+              <legend>Вид прибирання</legend>
+              <div class="segmented">
+<!-- @types -->
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="area">Площа, м²</label>
+              <div class="area">
+                <input type="range" id="area-range" min="20" max="250" step="5" value="55" aria-label="Площа, повзунок">
+                <input type="number" id="area" name="area" min="20" max="500" step="1" value="55" inputmode="numeric">
+              </div>
+            </div>
+
+            <fieldset class="field">
+              <legend>Додатково</legend>
+              <div class="extras">
+                <label class="extra-row">
+                  <span>Миття вікон <small>{{extras.window_price_text}} грн за стулку</small></span>
+                  <span class="counter">
+                    <button type="button" data-step="-1" aria-label="Менше вікон">−</button>
+                    <input type="number" name="windows" id="windows" value="0" min="0" max="40" inputmode="numeric" aria-label="Кількість стулок" data-price="{{extras.window_price}}">
+                    <button type="button" data-step="1" aria-label="Більше вікон">+</button>
+                  </span>
+                </label>
+<!-- @extras -->
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="order__side">
+            <div class="receipt" aria-live="polite">
+              <p class="receipt__label">Орієнтовна вартість</p>
+              <p class="receipt__total"><span data-total>—</span> <small>грн</small></p>
+              <ul class="receipt__lines" data-lines></ul>
+              <p class="receipt__note">Точну ціну фіксуємо під час дзвінка — вона не зміниться в день прибирання.</p>
+            </div>
+
+            <div class="contact">
+              <div class="field">
+                <label for="name">Ваше ім’я</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="phone">Телефон</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+380" required pattern="[\d\s()+\-]{10,}">
+              </div>
+              <div class="field">
+                <label for="date">Бажана дата</label>
+                <input id="date" name="date" type="date">
+              </div>
+              <div class="field">
+                <label for="comment">Коментар <small>необов’язково</small></label>
+                <textarea id="comment" name="comment" rows="3" placeholder="Район, поверх, тварини вдома…"></textarea>
+              </div>
+              <button class="btn btn--glove btn--block" type="submit">Надіслати заявку</button>
+              <p class="contact__legal">Натискаючи кнопку, ви погоджуєтесь, що ми зателефонуємо вам щодо заявки.</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap wrap--narrow">
+        <div class="section__head">
+          <p class="eyebrow">Питання</p>
+          <h2 id="faq-title">{{faq.heading}}</h2>
+        </div>
+        <div class="faq">
+<!-- @faq -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div>
+        <a class="logo logo--light" href="#top"><span class="logo__mark" aria-hidden="true"></span>{{contacts.brand}}</a>
+        <p class="footer__muted">{{contacts.tagline}}</p>
+      </div>
+      <div>
+        <p class="footer__title">Контакти</p>
+        <p><a href="{{contacts.phone_href}}">{{contacts.phone}}</a></p>
+        <p><a href="mailto:{{contacts.email}}">{{contacts.email}}</a></p>
+      </div>
+      <div>
+        <p class="footer__title">Графік</p>
+        <p>{{contacts.hours}}</p>
+        <p class="footer__muted">{{contacts.hours_note}}</p>
+      </div>
+    </div>
+    <div class="wrap footer__bottom">
+      <p>© <span data-year>2026</span> {{contacts.brand}}</p>
+    </div>
+  </footer>
+
+  <script src="/main.js" defer></script>
+</body>
+</html>

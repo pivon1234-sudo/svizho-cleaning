@@ -1,11 +1,15 @@
 # Налаштування Netlify.
-# Сайт статичний: збірка не потрібна, публікуємо корінь репозиторію.
+# Сторінки збираються з шаблонів src/ і даних content/ скриптом build.js
+# (без залежностей) у папку dist/, яка й публікується.
 # Після підключення репозиторію GitHub кожен push у гілку main
 # автоматично публікує сайт, а кожен Pull Request отримує preview-адресу.
 
 [build]
-  publish = "."
-  command = ""
+  command = "node build.js"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
 
 # Заголовки безпеки
 [[headers]]
@@ -25,6 +29,13 @@
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Конфіг адмінки завжди свіжий
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "no-cache"
+    X-Robots-Tag = "noindex"
 
 # Красиві адреси: /thanks замість /thanks.html
 [[redirects]]
